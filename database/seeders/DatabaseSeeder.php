@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // Schema::disableForeignKeyConstraints();
+        // $this->call(GenreSeeder::class);
+        // $this->call(AuthorSeeder::class);
+        // $this->call(BookSeeder::class);
+        // Schema::enableForeignKeyConstraints();
+        
+        // create an admin user with email admin@library.test and password secret
+        //User::truncate();
+        User::create(array('name' => 'Administrator',
+                           'email' => 'admin@yourvideo.test', 
+                           'password' => bcrypt('secret'),
+                           'role' => 1));
     }
 }
