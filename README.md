@@ -1,62 +1,32 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+![YourVideo logo](https://github.com/RenarsKokins/YourVideo/blob/master/logo.png?raw=true)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About YourVideo
 
-## About Laravel
+YourVideo is a free video sharing platform made with Laravel framework. It is possible to store and watch videos which people have uploaded on this site. It is made using [Laravel](https://laravel.com/) framework and [MySQL](https://www.mysql.com/) database for information storage.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Installation guide
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Pre-requisites
+* Have [Composer](https://getcomposer.org/download/) installed,
+* Have [Git](https://git-scm.com/downloads) installed,
+* Have a virtual server installed ([XAMPP](https://www.apachefriends.org/download.html) for example).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Installation
+1. Open your console and go to web server root folder (cd "YourWebRootPath"),
+2. Execute command in console: `git clone https://github.com/RenarsKokins/YourVideo.git YourVideo`,
+3. Open that folder in console: `cd YourVideo`,
+4. Run Composer to install the dependencies: `composer install`,
+5. Run 2 commands of NPM to install the dependencies: `npm install` and after that `npm run dev`,
+6. Execute this command: `php artisan key:generate`.
 
-## Learning Laravel
+You have installed the project! Now, you just need to create a new database, create tables using migrations and, optionally, seed them.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Database setup
+1. Make sure your MySQL and Apache service is running (in WAMP, LAMP or XAMPP),
+2. Open this page in your desired browser `localhost/phpmyadmin`,
+3. Now, click on "New" button on the left list,
+4. Enter database name as `yourvideo` and click "Create", it should create a database with no errors,
+5. Now, execute this command in your console `php artisan migrate`,
+6. After that, execute this command in your console `php artisan db:seed`.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+If you don't encounter any errors, you are done! To log in with a test user (don't use this in production!), use this email `admin@yourvideo.test` and password `secret`.
