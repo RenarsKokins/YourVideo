@@ -17,6 +17,7 @@ YourVideo is a free video sharing platform made with Laravel framework. It is po
 3. Open that folder in console: `cd YourVideo`,
 4. Run Composer to install the dependencies: `composer install`,
 5. Run 2 commands of NPM to install the dependencies: `npm install` and after that `npm run dev`,
+6. Rename `.env.example` to `.env`, which is loacted in the project folder,
 6. Execute this command: `php artisan key:generate`.
 
 You have installed the project! Now, you just need to create a new database, create tables using migrations and, optionally, seed them.
