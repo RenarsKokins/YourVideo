@@ -11,6 +11,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @if (Route::has('video.view'))
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    @endif
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -21,10 +24,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+        <nav class="navbar theme-lighter-base navbar-expand-md navbar-dark shadow-sm">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="img/logo-orange.webp" width="120" alt="YourVideo logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -33,7 +36,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -74,10 +77,15 @@
                 </div>
             </div>
         </nav>
-
+        @if(Route::is('video.view'))
+        <main>
+            @yield('content')
+        </main>
+        @else
         <main class="py-4">
             @yield('content')
         </main>
+        @endif
     </div>
 </body>
 </html>
