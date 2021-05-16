@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,17 +15,7 @@ use Illuminate\Support\Facades\File;
 
 Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/videos/{filename}', function ($filename){
-    $path = storage_path('videos/' . $filename . '.mp4');
-    if (!File::exists($path)) {
-        abort(404);
-    }
-    $file = File::get($path);
-    $type = File::mimeType($path);
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-    return $response;
-});
-
+Route::get('/video', [App\Http\Controllers\VideoViewController::class, 'showVideo'])->name('video.view');
+Route::post('/video', [App\Http\Controllers\VideoViewController::class, 'saveLike'])->name('video.liked');
+//Route::post('/video', [App\Http\Controllers\VideoViewController::class, 'saveComment'])->name('video.commented');
 
