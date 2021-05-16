@@ -1,4 +1,4 @@
-![YourVideo logo](https://github.com/RenarsKokins/YourVideo/blob/master/logo.png?raw=true)
+![YourVideo logo](https://github.com/RenarsKokins/YourVideo/blob/master/public/img/logo-orange.webp?raw=true)
 
 ## About YourVideo
 
