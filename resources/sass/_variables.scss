@@ -19,11 +19,14 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
+$i: unquote("!important");
+
 $theme-colors: (
   "base": #303239,
   "darker-base": #23252A,
   "lighter-base": #41434B,
-  "dark-base": #19191C
+  "dark-base": #19191C,
+  "accent": #FF9430
 );
 
 @function color($key: "blue") {
@@ -35,14 +38,21 @@ $theme-colors: (
 }
 
 .theme-base{
-    background-color: theme-color("base");
+    background-color: theme-color("base") $i;
 }
 .theme-darker-base{
-    background-color: theme-color("darker-base");
+    background-color: theme-color("darker-base") $i;
 }
 .theme-lighter-base{
-    background-color: theme-color("lighter-base");
+    background-color: theme-color("lighter-base") $i;
 }
 .theme-dark-base{
-    background-color: theme-color("dark-base");
+    background-color: theme-color("dark-base") $i;
+}
+.theme-accent{
+    background-color: theme-color("accent") $i;
+}
+
+body,html {
+    min-height: 100%;
 }
