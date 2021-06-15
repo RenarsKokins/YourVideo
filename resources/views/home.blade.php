@@ -1,21 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    {{ __('Hello! Videos will be shown here...') }}
-                </div>
-            </div>
+<div class="col-sm container-fluid">
+    <div class="row justify-content-around">
+        <div class="theme-dark-base col-5">
+        <h4 class="mt-4">Videos from people you follow</h4>
+        <hr class="theme-lighter-base"/>
+        <div class="following-videos">
+        </div>
+        </div>
+        <div class="theme-dark-base col-5">
+        <h4 class="mt-4">Recommended videos</h4>
+        <hr class="theme-lighter-base"/>
+        <div class="recommended-videos">
+        </div>
         </div>
     </div>
 </div>
