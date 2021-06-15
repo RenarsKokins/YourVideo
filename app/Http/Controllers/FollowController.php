@@ -14,7 +14,7 @@ class FollowController extends Controller
         }
         $user = Auth::user();
 
-        if (Follow::where('follower_id', $user->id)->where('following_id', $request->id)) {
+        if (Follow::where('follower_id', $user->id)->where('following_id', $request->id)->exists()) {
             
         }
     }

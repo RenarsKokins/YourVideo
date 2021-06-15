@@ -10,6 +10,7 @@ YourVideo is a free video sharing platform made with Laravel framework. It is po
 * Have [Composer](https://getcomposer.org/download/) installed,
 * Have [Git](https://git-scm.com/downloads) installed,
 * Have a virtual server installed ([XAMPP](https://www.apachefriends.org/download.html) for example).
+* Have [FFMPEG](https://www.ffmpeg.org/) installed on your machine and make sure you have added it to your enviroment PATH!
 
 ### Installation
 1. Open your console and go to web server root folder (cd "YourWebRootPath"),
@@ -30,4 +31,8 @@ You have installed the project! Now, you just need to create a new database, cre
 5. Now, execute this command in your console `php artisan migrate`,
 6. After that, execute this command in your console `php artisan db:seed`.
 
+### Additional requirements
+1. If you want to upload videos, you have to run `php artisan queue:work`. It is a process which will render videos continuously(if you dont close your console).
+
+### Setup is done!
 If you don't encounter any errors, you are done! To log in with a test user (don't use this in production!), use this email `admin@yourvideo.test` and password `secret`.
