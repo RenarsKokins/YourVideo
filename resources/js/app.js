@@ -5,7 +5,6 @@
  */
 
 require('./bootstrap');
-require('../../node_modules/video.js/dist/video');
 
 window.Vue = require('vue').default;
 
