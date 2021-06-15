@@ -20,11 +20,17 @@ class DatabaseSeeder extends Seeder
         // $this->call(BookSeeder::class);
         // Schema::enableForeignKeyConstraints();
         
-        // create an admin user with email admin@library.test and password secret
+        // create an admin user with email admin@yourvideo.test and password secret
         //User::truncate();
         User::create(array('name' => 'Administrator',
                            'email' => 'admin@yourvideo.test', 
                            'password' => bcrypt('secret'),
                            'role' => 1));
+
+        User::create(array('name' => 'User',
+                           'email' => 'user@yourvideo.test', 
+                           'password' => bcrypt('secret'),
+                           'role' => 0));
+                           
     }
 }
