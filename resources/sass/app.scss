@@ -4,8 +4,11 @@
 // Variables
 @import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
 // JSvideo CSS
 @import '~video.js/dist/video-js';
+
+// JSvideo HLS CSS
+@import '~videojs-hls-quality-selector/dist/videojs-hls-quality-selector';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
