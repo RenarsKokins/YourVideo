@@ -1,0 +1,8 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/js/popper.js.map": "/js/popper.js.map",
+    "/js/video.min.js": "/js/video.min.js",
+    "/js/videojs-hls-quality-selector.min.js": "/js/videojs-hls-quality-selector.min.js",
+    "/js/videojs-contrib-quality-levels.min.js": "/js/videojs-contrib-quality-levels.min.js"
+}

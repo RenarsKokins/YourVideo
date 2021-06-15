@@ -1,0 +1,58 @@
+// Body
+$body-bg: #303239;
+$body-color: #FFF;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+
+$i: unquote("!important");
+
+$theme-colors: (
+  "base": #303239,
+  "darker-base": #23252A,
+  "lighter-base": #41434B,
+  "dark-base": #19191C,
+  "accent": #FF9430
+);
+
+@function color($key: "blue") {
+    @return map-get($colors, $key);
+}
+
+@function theme-color($key: "primary") {
+    @return map-get($theme-colors, $key);
+}
+
+.theme-base{
+    background-color: theme-color("base") $i;
+}
+.theme-darker-base{
+    background-color: theme-color("darker-base") $i;
+}
+.theme-lighter-base{
+    background-color: theme-color("lighter-base") $i;
+}
+.theme-dark-base{
+    background-color: theme-color("dark-base") $i;
+}
+.theme-accent{
+    background-color: theme-color("accent") $i;
+}
+
+body,html {
+    min-height: 100%;
+}
