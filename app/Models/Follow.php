@@ -9,4 +9,8 @@ use App\Models\User;
 class Follow extends Model
 {
     use HasFactory;
+    const UPDATED_AT = null;
+    const CREATED_AT = null;
+
+    protected $table = 'followers';
 }

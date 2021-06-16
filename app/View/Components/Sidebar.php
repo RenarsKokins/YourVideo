@@ -12,16 +12,16 @@ class Sidebar extends Component
      *
      * @var string
      */
-    public $subscriptions;
+    public $follows;
     /**
      * Create a new component instance.
      *
      * @return void
      */
     
-    public function __construct($subscriptions)
+    public function __construct($follows)
     {
-        $this->subscriptions = $subscriptions;
+        $this->follows = $follows;
     }
 
     /**

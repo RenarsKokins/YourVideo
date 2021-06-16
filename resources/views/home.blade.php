@@ -7,6 +7,9 @@
         <h4 class="mt-4">Videos from people you follow</h4>
         <hr class="theme-lighter-base"/>
         <div class="following-videos">
+        @guest
+        <p>Log in to follow content creators.</p>
+        @endguest
         </div>
         </div>
         <div class="theme-dark-base col-5">

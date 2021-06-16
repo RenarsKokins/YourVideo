@@ -11,9 +11,9 @@
     
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" type="text/javascript" defer></script>
-    
-    @if (Route::is('video.view'))
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    @if (Route::is('video.view'))
     <script src="{{ asset('js/video.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/videojs-hls-quality-selector.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/videojs-contrib-quality-levels.min.js') }}" type="text/javascript"></script>
@@ -58,6 +58,24 @@
                     $(".recommended-videos").html(data);
                 },
                 error: function(data) {
+                    console.log('Error:', data);
+                }
+            });
+        }
+
+        function loadFollow(){
+            var url = "{{ route('follow.check') }}";
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: { "user_id": user_id, "_token": CSRF_TOKEN },
+                success: function (data) {
+                    if(data.data==="following")$("#follow-button").html("Unfollow");
+                    else $("#follow-button").html("Follow");
+                    console.log('Success:', data);
+                },
+                error: function (data) {
                     console.log('Error:', data);
                 }
             });
@@ -110,6 +128,8 @@
                 data: { "user_id": user_id, "_token": CSRF_TOKEN },
                 success: function (data) {
                     if(data.data=="no_login") window.location.replace("{{route('home').'/login'}}");
+                    if(data.data==="followed")$("#follow-button").html("Unfollow");
+                    if(data.data==="unfollowed")$("#follow-button").html("Follow");
                     console.log('Success:', data);
                 },
                 error: function (data) {
@@ -117,7 +137,7 @@
                 }
             });
         });
-
+        loadFollow();
         reloadComments();
         loadVideos();
     });     
@@ -125,11 +145,10 @@
     @endif
 
     @if (Route::is('home'))
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
     var ROOTURL = "{{ route('home') }}";
     $(document).ready(function(){
-        function loadVideos(){
+        function loadRecommendedVideos(){
             $.ajax({
                 type: "POST",
                 url: "{{ route('home.get_recommended') }}",
@@ -142,13 +161,28 @@
                 }
             });
         }
-        loadVideos();
+        function loadFollowingVideos(){
+            $.ajax({
+                type: "POST",
+                url: "{{ route('home.get_following') }}",
+                data: {"_token": "{{ csrf_token() }}"},
+                success: function(data){
+                    $(".following-videos").html(data);
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                }
+            });
+        }
+        @auth
+        loadFollowingVideos();
+        @endauth
+        loadRecommendedVideos();
     }); 
     </script>
     @endif
 
     @if (Route::is('account.upload'))
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
     var SITEURL = "{{ route('account.upload') }}";
     var ROOTURL = "{{ route('home') }}";
@@ -200,6 +234,105 @@
     </script>
     @endif
 
+    @if (Route::is('search'))
+    <script>
+    $(document).ready(function(){
+        var ROOTURL = "{{ route('search.view') }}";
+        function loadVideos(){
+            $.ajax({
+                type: "POST",
+                url: ROOTURL,
+                data: {"count":20, "q":"{{$search_text}}", "_token": "{{ csrf_token() }}"},
+                success: function(data){
+                    $(".videos").html(data);
+                    console.log('Success:', data);
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                }
+            });
+        }
+        loadVideos();
+    }); 
+    </script>
+    @endif
+
+    @if (Route::is('account.view_videos'))
+    <script>
+    $(document).ready(function(){
+        var ROOTURL = "{{ route('account.view_videos.view') }}";
+        $.ajax({
+            type: "POST",
+            url: ROOTURL,
+            data: {"_token": "{{ csrf_token() }}"},
+            success: function(data){
+                $(".videos").html(data);
+            },
+            error: function(data) {
+                console.log('Error:', data);
+            }
+        });
+        $(document).on('click', ".delete-video", function (e) {
+            var url = "{{ route('account.view_videos.delete') }}";
+            var btn = $(this);
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            if (confirm("Are you sure?")) {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: { "video_id": btn.attr('id'), "_token": CSRF_TOKEN },
+                    success: function (data) {
+                        console.log('Success:', data);
+                        window.location.href=window.location.href;
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
+            }
+        });
+    }); 
+    </script>
+    @endif
+
+    @if (Route::is('account.view_videos_admin'))
+    <script>
+    $(document).ready(function(){
+        var ROOTURL = "{{ route('account.view_videos_admin.view') }}";
+        $.ajax({
+            type: "POST",
+            url: ROOTURL,
+            data: {"_token": "{{ csrf_token() }}"},
+            success: function(data){
+                $(".videos").html(data);
+            },
+            error: function(data) {
+                console.log('Error:', data);
+            }
+        });
+        $(document).on('click', ".delete-video", function (e) {
+            var url = "{{ route('account.view_videos.delete') }}";
+            var btn = $(this);
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            if (confirm("Are you sure?")) {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: { "video_id": btn.attr('id'), "_token": CSRF_TOKEN },
+                    success: function (data) {
+                        console.log('Success:', data);
+                        window.location.href=window.location.href;
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
+            }
+        });
+    }); 
+    </script>
+    @endif
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -211,7 +344,7 @@
     <div id="app" class="h-100">
         <nav class="navbar theme-lighter-base navbar-expand-md sticky-top navbar-dark shadow">
             <div class="container-fluid pl-0 pr-0">
-                @if (Route::is('home') or Route::is('video.view'))
+                @if (Route::is('home') or Route::is('video.view') or Route::is('search'))
                 <button class="btn" type="button" data-toggle="collapse" data-target="#sidebarContent" aria-controls="sidebarContent" aria-expanded="false" aria-label="{{ __('Toggle sidebar') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -271,11 +404,13 @@
                                     <a class="dropdown-item" href="{{ route('account.view_videos') }}">
                                         {{ __('View my videos') }}
                                     </a>
-
-                                    <!--Settings button-->
-                                    <a class="dropdown-item" href="{{ route('account') }}">
-                                        {{ __('Account settings') }}
+                                    
+                                    @if (Auth::user()->role === 1)
+                                    <!--Admin video view-->
+                                    <a class="dropdown-item" href="{{ route('account.view_videos_admin') }}">
+                                        {{ __('View all videos') }}
                                     </a>
+                                    @endif
                                 </div>
                             </li>
                         @endguest
@@ -285,8 +420,12 @@
         </nav>
         <main class="container-fluid">
             <div class="row">
-                @if (Route::is('home') or Route::is('video.view'))
-                <x-sidebar :subscriptions="[]"/>
+                @if (Route::is('home') or Route::is('video.view') or Route::is('search'))
+                @guest
+                <x-sidebar :follows="[]"/>
+                @else
+                <x-sidebar :follows="Auth::user()->following"/>
+                @endguest
                 @endif
                 @section('content')
                 @show

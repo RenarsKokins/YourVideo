@@ -28,4 +28,14 @@ class HomeController extends Controller
         $videos = Video::inRandomOrder()->where('publicity', 'P')->limit($request->count)->get();
         return View::make('components.video-template', ['videos'=>$videos])->render();
     }
+
+    public function get_following(Request $request){
+        $following = Auth::user()->following;
+        $followers = []; 
+        foreach($following as $follow){
+            $followers[] = $follow->id;
+        }
+        $videos = Video::whereIn('user_id', $followers)->where('publicity', 'P')->orderBy('created_at', 'desc')->get();
+        return View::make('components.video-template', ['videos'=>$videos])->render();
+    }
 }

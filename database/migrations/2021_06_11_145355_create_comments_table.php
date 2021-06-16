@@ -15,8 +15,8 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('video_id')->constrained('videos');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('video_id')->constrained('videos')->onDelete('cascade');;
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');;
             $table->timestamp('posted_at');
             $table->unsignedSmallInteger('likes')->default(0);
             $table->string('comment', 5000);
